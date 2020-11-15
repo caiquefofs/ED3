@@ -15,6 +15,9 @@ void funcionalidade1(){
     Dados regDados;
     indiceCab regICab;
     indiceDados regID;
+    NoIndex * indiceDat;
+
+    indiceDat = NoIndex * malloc 
 
 
     scanf("%s", aEntrada);
@@ -67,16 +70,31 @@ void funcionalidade1(){
         if((fscanf(fe, "%d",&regDados.idPessoa))==EOF){
             break;
         }
+
+        for(int i=0; i<40, i++){
+            regDados.nomePessoa[i]='$';
+        }
+        for(int i=0; i<15, i++){
+            regDados.twitterPessoa[i]='$';
+        }
+
         fread(&aux, sizeof(char), 1, fe);
         fscanf(fe, "%[^,]", &regDados.nomePessoa);
         fscanf(fe, "%d",&regDados.idadePessoa);
         fread(&aux, sizeof(char), 1, fe);
         fscanf(fe, "%[^,]", &regDados.twitterPessoa);
         fread(&aux, sizeof(char), 1, fe);
+        regDados.removido = '1';
 
-        fscanf(&regDados.nomePessoa);
-        fscanf(&regDados.idadePessoa);
-        fscanf(&regDados.twitterPessoa,);
+        fwrite(&regDados.removido, sizeof(char), 1, fp);
+        fwrite(&regDados.idPessoa, sizeof(int), 1, fp);
+        fwrite(&regDados.nomePessoa, sizeof(char), 40, fp);
+        fwrite(&regDados.idadePessoa, sizeof(int), 1, fp);
+        fwrite(&regDados.twitterPessoa, sizeof(char), 15, fp);
+
+        numPessoas++;
+
+        fwrite(&regIDados, sizeof(char), 40, fip);
 
     
     };
