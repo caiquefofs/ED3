@@ -13,24 +13,24 @@ int main(){
 
     switch (funcionalidade)
     {
-    case 1
+    case 1:
         funcionalidade1();
         break;
-    case 2
+    case 2:
         funcionalidade2();
         break;
-    case 3
+    case 3:
         funcionalidade3();
         break;
-    case 4
+    case 4:
         funcionalidade4();
         break;
-    case 5
+    case 5:
         funcionalidade5();
         break;
 
     default:
-        printf("Opcao invalida!")
+        printf("Opcao invalida!");
         break;
     }
 

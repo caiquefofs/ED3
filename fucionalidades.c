@@ -5,16 +5,16 @@
 #include "funcionalidades.h"
 
 
+
 void funcionalidade1(){
     FILE *fe = NULL , *fp = NULL, *fip = NULL;
+    int numPessoas = 0;
     char aEntrada[30], aPessoa[30], aIndxPessoa[30];
     char aux;
     Cab regCab;
     Dados regDados;
     indiceCab regICab;
     indiceDados regID;
-    NoDados nd;
-    NoIndex ni;
 
 
     scanf("%s", aEntrada);
@@ -45,7 +45,46 @@ void funcionalidade1(){
         fread(&aux, sizeof(char), 1, fe);
     }
 
-    fscanf();
+    regICab.status = '0';
+    for(int i=0; i<8; i++){
+        regICab.lixo[i]='$';
+    }
+   
+    regCab.status = '0';
+    regCab.quantidadePessoas = 0;
+    for(int i=0; i<59; i++){
+        regCab.lixo[i]='$';
+    }
+    
+    fwrite(&regICab.status, sizeof(char), 1, fip);
+    fwrite(regICab.lixo, sizeof(char), 8, fip);
+
+    fwrite(&regCab.status, sizeof(char), 1, fp);
+    fwrite(&regCab.quantidadePessoas, sizeof(int), 1, fp);
+    fwrite(regCab.lixo, sizeof(char), 59, fp);
+
+    while (1){
+        if((fscanf(fe, "%d",&regDados.idPessoa))==EOF){
+            break;
+        }
+        fread(&aux, sizeof(char), 1, fe);
+        fscanf(fe, "%[^,]", &regDados.nomePessoa);
+        fscanf(fe, "%d",&regDados.idadePessoa);
+        fread(&aux, sizeof(char), 1, fe);
+        fscanf(fe, "%[^,]", &regDados.twitterPessoa);
+        fread(&aux, sizeof(char), 1, fe);
+
+        fscanf(&regDados.nomePessoa);
+        fscanf(&regDados.idadePessoa);
+        fscanf(&regDados.twitterPessoa,);
+
+    
+    };
+    
+    
+    
+    
+    
 
 
 	

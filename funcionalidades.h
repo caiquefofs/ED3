@@ -1,13 +1,14 @@
 #ifndef FUNCIONALIDADES_H
 #define FUNCIONALIDADES_H
 
-typedef struct{
+
+typedef struct Cab{
     char status;
     int quantidadePessoas;
-    char lixo[64];
+    char lixo[59];
 }Cab;
 
-typedef struct{
+typedef struct Dados{
     char removido;
     int idPessoa;
     char nomePessoa [40];
@@ -16,22 +17,22 @@ typedef struct{
 
 }Dados;
 
-typedef struct {
+typedef struct NoDados{
     Dados registro;
     NoDados *prox;
 }NoDados;
 
-typedef struct{
+typedef struct indiceCab{
     char status;
     char lixo [7];
 }indiceCab;
 
-typedef struct{
+typedef struct indiceDados{
     int idPessoa;
     int RRN;
 }indiceDados;
 
-typedef struct {
+typedef struct NoIndex{
     indiceDados registro;
     NoIndex *prox;
 }NoIndex;
