@@ -23,13 +23,18 @@ void funcionalidade1(){
         return;
     }
 
+    /*
     regID = (indiceDados *) malloc (sizeof(indiceDados));
     if(regID == NULL){
         printf("Erro de alocacao.");
         return;
-    }
+    }*/
 
-    indiceDat->registro = regID;
+    //regID->idPessoa = -1;
+    //regID->RRN = -1;
+
+    //indiceDat->registro = regID;
+    //indiceDat->prox = NULL;
 
     scanf("%s", aEntrada);
     scanf("%s", aPessoa);
@@ -103,12 +108,22 @@ void funcionalidade1(){
         fwrite(&regDados.idadePessoa, sizeof(int), 1, fp);
         fwrite(&regDados.twitterPessoa, sizeof(char), 15, fp);
 
+        regID = (indiceDados *) malloc (sizeof(indiceDados));
 
+        if(regID == NULL){
+            printf("Erro de alocacao.");
+            return;
+        }
+
+        
 
         regID->idPessoa = regDados.idPessoa;
         regID->RRN = numPessoas;
 
+
         numPessoas++;
+
+
     
     };
     

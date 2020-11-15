@@ -1,41 +1,47 @@
 #ifndef FUNCIONALIDADES_H
 #define FUNCIONALIDADES_H
 
+typedef struct Cab Cab;
+typedef struct Dados Dados;
+typedef struct NoDados NoDados;
+typedef struct indiceCab indiceCab;
+typedef struct indiceDados indiceDados;
+typedef struct NoIndex NoIndex;
 
-typedef struct Cab{
+struct Cab{
     char status;
     int quantidadePessoas;
     char lixo[59];
-}Cab;
+};
 
-typedef struct Dados{
+struct Dados{
     char removido;
     int idPessoa;
     char nomePessoa [40];
     int idadePessoa;
     char twitterPessoa [15];
 
-}Dados;
+};
 
-typedef struct NoDados{
+struct NoDados{
     Dados registro;
     NoDados *prox;
-}NoDados;
+};
 
-typedef struct indiceCab{
+struct indiceCab{
     char status;
     char lixo [7];
-}indiceCab;
+};
 
-typedef struct indiceDados{
+struct indiceDados{
     int idPessoa;
     int RRN;
-}indiceDados;
+};
 
-typedef struct NoIndex{
+struct NoIndex{
     indiceDados *registro;
     NoIndex *prox;
-}NoIndex;
+};
 
 
 void funcionalidade1();
