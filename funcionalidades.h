@@ -33,7 +33,7 @@ typedef struct indiceDados{
 }indiceDados;
 
 typedef struct NoIndex{
-    indiceDados registro;
+    indiceDados *registro;
     NoIndex *prox;
 }NoIndex;
 

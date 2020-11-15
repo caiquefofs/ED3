@@ -14,11 +14,22 @@ void funcionalidade1(){
     Cab regCab;
     Dados regDados;
     indiceCab regICab;
-    indiceDados regID;
-    NoIndex * indiceDat;
+    indiceDados *regID = NULL, *regIDAux;
+    NoIndex *indiceDat = NULL, *indiceDatAux;
 
-    indiceDat = NoIndex * malloc 
+    indiceDat = (NoIndex *) malloc (sizeof(NoIndex));
+    if(indiceDat == NULL){
+        printf("Erro de alocacao.");
+        return;
+    }
 
+    regID = (indiceDados *) malloc (sizeof(indiceDados));
+    if(regID == NULL){
+        printf("Erro de alocacao.");
+        return;
+    }
+
+    indiceDat->registro = regID;
 
     scanf("%s", aEntrada);
     scanf("%s", aPessoa);
@@ -71,10 +82,10 @@ void funcionalidade1(){
             break;
         }
 
-        for(int i=0; i<40, i++){
+        for(int i=0; i<40; i++){
             regDados.nomePessoa[i]='$';
         }
-        for(int i=0; i<15, i++){
+        for(int i=0; i<15; i++){
             regDados.twitterPessoa[i]='$';
         }
 
@@ -92,10 +103,12 @@ void funcionalidade1(){
         fwrite(&regDados.idadePessoa, sizeof(int), 1, fp);
         fwrite(&regDados.twitterPessoa, sizeof(char), 15, fp);
 
+
+
+        regID->idPessoa = regDados.idPessoa;
+        regID->RRN = numPessoas;
+
         numPessoas++;
-
-        fwrite(&regIDados, sizeof(char), 40, fip);
-
     
     };
     
