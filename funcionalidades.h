@@ -16,6 +16,11 @@ typedef struct{
 
 }Dados;
 
+typedef struct {
+    Dados registro;
+    NoDados *prox;
+}NoDados;
+
 typedef struct{
     char status;
     char lixo [7];
@@ -25,6 +30,12 @@ typedef struct{
     int idPessoa;
     int RRN;
 }indiceDados;
+
+typedef struct {
+    indiceDados registro;
+    NoIndex *prox;
+}NoIndex;
+
 
 void funcionalidade1();
 

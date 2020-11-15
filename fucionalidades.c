@@ -9,6 +9,13 @@ void funcionalidade1(){
     FILE *fe = NULL , *fp = NULL, *fip = NULL;
     char aEntrada[30], aPessoa[30], aIndxPessoa[30];
     char aux;
+    Cab regCab;
+    Dados regDados;
+    indiceCab regICab;
+    indiceDados regID;
+    NoDados nd;
+    NoIndex ni;
+
 
     scanf("%s", aEntrada);
     scanf("%s", aPessoa);
@@ -38,6 +45,7 @@ void funcionalidade1(){
         fread(&aux, sizeof(char), 1, fe);
     }
 
+    fscanf();
 
 
 	
