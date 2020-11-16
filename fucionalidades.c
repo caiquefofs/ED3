@@ -24,20 +24,7 @@ void funcionalidade1(){
     }
 
     indiceDatHead->registro = NULL;
-    indiceDatHead->prox = NULL;
-
-    /*
-    regID = (indiceDados *) malloc (sizeof(indiceDados));
-    if(regID == NULL){
-        printf("Erro de alocacao.");
-        return;
-    }*/
-
-    //regID->idPessoa = -1;
-    //regID->RRN = -1;
-
-    //indiceDat->registro = regID;
-    //indiceDat->prox = NULL;
+    indiceDatHead->prox = NULL; 
 
     scanf("%s", aEntrada);
     scanf("%s", aPessoa);
