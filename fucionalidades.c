@@ -15,13 +15,16 @@ void funcionalidade1(){
     Dados regDados;
     indiceCab regICab;
     indiceDados *regID = NULL, *regIDAux;
-    NoIndex *indiceDat = NULL, *indiceDatAux;
+    NoIndex *indiceDatHead = NULL, *indiceDat = NULL, *percorreIndiceDat = NULL, *indiceDatAux;
 
-    indiceDat = (NoIndex *) malloc (sizeof(NoIndex));
-    if(indiceDat == NULL){
+    indiceDatHead = (NoIndex *) malloc (sizeof(NoIndex));
+    if(indiceDatHead == NULL){
         printf("Erro de alocacao.");
         return;
     }
+
+    indiceDatHead->registro = NULL;
+    indiceDatHead->prox = NULL;
 
     /*
     regID = (indiceDados *) malloc (sizeof(indiceDados));
@@ -115,23 +118,56 @@ void funcionalidade1(){
             return;
         }
 
-        
-
         regID->idPessoa = regDados.idPessoa;
         regID->RRN = numPessoas;
 
+        indiceDat = (NoIndex *) malloc (sizeof(NoIndex));
+        if(indiceDatHead == NULL){
+            printf("Erro de alocacao.");
+            return;
+        }
 
+        indiceDat->prox = NULL;
+        indiceDat->registro = regID;
+
+        if(indiceDatHead->registro == NULL){
+            indiceDatHead->registro = regID;
+        }else
+        {
+            percorreIndiceDat = indiceDatHead;
+            while (((percorreIndiceDat->prox->registro->idPessoa) < (regID->idPessoa))||(percorreIndiceDat->prox=!NULL))
+            {
+                percorreIndiceDat = percorreIndiceDat->prox;
+                
+            }
+            if (percorreIndiceDat->prox==NULL)
+            {
+                percorreIndiceDat->prox=indiceDat;
+            }else{
+                indiceDatAux = percorreIndiceDat->prox;
+                percorreIndiceDat->prox = indiceDat;
+                indiceDat->prox = indiceDatAux; 
+            }                 
+        }
+        
         numPessoas++;
+    }
 
+    percorreIndiceDat = indiceDatHead;
+        
+    while(percorreIndiceDat=!NULL){
+        fwrite(&percorreIndiceDat->registro->idPessoa, sizeof(int), 1, fip);
+        fwrite(&percorreIndiceDat->registro->RRN, sizeof(int), 1, fip);
+        percorreIndiceDat = percorreIndiceDat->prox;
+    }
 
-    
-    };
-    
-    
-    
-    
-    
+    regCab.status = '0';
+    regICab.status = '0';
 
+    fseek(fp, 0, SEEK_SET);
+    fwrite(&regCab.status, sizeof(char), 1, fp);
+    fwrite(&numPessoas, sizeof(int), 1, fp);
+    fwrite(&regICab.status, sizeof(char), 1, fip);
 
 	
 }
