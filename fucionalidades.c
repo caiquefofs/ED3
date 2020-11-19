@@ -3,11 +3,12 @@
 #include <stdio.h>
 #include <ctype.h>
 #include "funcionalidades.h"
+#include "fornecido.h"
 
 
 
 void funcionalidade1(){
-    FILE *fe = NULL , *fp = NULL, *fip = NULL;
+    FILE *fe = NULL , *fp = NULL, *fip = NULL, *nulo=NULL;
     int numPessoas = 0;
     char aEntrada[30], aPessoa[30], aIndxPessoa[30];
     char aux;
@@ -66,7 +67,7 @@ void funcionalidade1(){
     }
     
     fwrite(&regICab.status, sizeof(char), 1, fip);
-    fwrite(regICab.lixo, sizeof(char), 8, fip);
+    fwrite(regICab.lixo, sizeof(char), 7, fip);
 
     fwrite(&regCab.status, sizeof(char), 1, fp);
     fwrite(&regCab.quantidadePessoas, sizeof(int), 1, fp);
@@ -85,10 +86,11 @@ void funcionalidade1(){
         }
 
         fread(&aux, sizeof(char), 1, fe);
-        fscanf(fe, "%[^,]", &regDados.nomePessoa);
+        fscanf(fe, "%[^,]", regDados.nomePessoa);
+        fread(&aux, sizeof(char), 1, fe);
         fscanf(fe, "%d",&regDados.idadePessoa);
         fread(&aux, sizeof(char), 1, fe);
-        fscanf(fe, "%[^,]", &regDados.twitterPessoa);
+        fscanf(fe, "%[^\n]", regDados.twitterPessoa);
         fread(&aux, sizeof(char), 1, fe);
         regDados.removido = '1';
 
@@ -98,7 +100,7 @@ void funcionalidade1(){
         fwrite(&regDados.idadePessoa, sizeof(int), 1, fp);
         fwrite(&regDados.twitterPessoa, sizeof(char), 15, fp);
 
-        regID = (indiceDados *) malloc (sizeof(indiceDados));
+        regID = (indiceDados *) malloc (sizeof(indiceDados));                    //Aloca a estrutura do registrador do Indice de Dados
 
         if(regID == NULL){
             printf("Erro de alocacao.");
@@ -109,7 +111,7 @@ void funcionalidade1(){
         regID->RRN = numPessoas;
 
         indiceDat = (NoIndex *) malloc (sizeof(NoIndex));
-        if(indiceDatHead == NULL){
+        if(indiceDat == NULL){
             printf("Erro de alocacao.");
             return;
         }
@@ -121,20 +123,33 @@ void funcionalidade1(){
             indiceDatHead->registro = regID;
         }else
         {
+
             percorreIndiceDat = indiceDatHead;
-            while (((percorreIndiceDat->prox->registro->idPessoa) < (regID->idPessoa))||(percorreIndiceDat->prox=!NULL))
+            while (percorreIndiceDat->prox != NULL)
             {
-                percorreIndiceDat = percorreIndiceDat->prox;
-                
+                if(percorreIndiceDat->prox->registro->idPessoa < indiceDat->registro->idPessoa){
+                    percorreIndiceDat = percorreIndiceDat->prox;
+                }else{ 
+                    break;
+                }    
             }
             if (percorreIndiceDat->prox==NULL)
             {
-                percorreIndiceDat->prox=indiceDat;
+                if(percorreIndiceDat->registro->idPessoa<indiceDat->registro->idPessoa){
+                    percorreIndiceDat->prox=indiceDat;
+                }else
+                {
+                    indiceDatAux = percorreIndiceDat->prox;
+                    percorreIndiceDat->prox = indiceDat;
+                    indiceDat->prox = indiceDatAux; 
+                }
+                
+                
             }else{
                 indiceDatAux = percorreIndiceDat->prox;
                 percorreIndiceDat->prox = indiceDat;
                 indiceDat->prox = indiceDatAux; 
-            }                 
+            }               
         }
         
         numPessoas++;
@@ -142,20 +157,26 @@ void funcionalidade1(){
 
     percorreIndiceDat = indiceDatHead;
         
-    while(percorreIndiceDat=!NULL){
+    while(percorreIndiceDat!=NULL){
         fwrite(&percorreIndiceDat->registro->idPessoa, sizeof(int), 1, fip);
         fwrite(&percorreIndiceDat->registro->RRN, sizeof(int), 1, fip);
         percorreIndiceDat = percorreIndiceDat->prox;
     }
 
-    regCab.status = '0';
-    regICab.status = '0';
+    regCab.status = '1';
+    regICab.status = '1';
 
     fseek(fp, 0, SEEK_SET);
+    fseek(fip, 0, SEEK_SET);
     fwrite(&regCab.status, sizeof(char), 1, fp);
     fwrite(&numPessoas, sizeof(int), 1, fp);
     fwrite(&regICab.status, sizeof(char), 1, fip);
 
+    fclose(fe);
+    fclose(fp);
+    fclose(fip);
+
+    binarioNaTela1(aPessoa, aIndxPessoa);
 	
 }
 

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h> 
 #include "funcionalidades.h"
+#include "fornecido.h"
 
 int main(){
     FILE * entrada;
